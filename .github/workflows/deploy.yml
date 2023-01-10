@@ -10,10 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: "Install & build"
+      - name: "test Echo"
         run: |
           echo $PWD
-          mv public/index.html public/index.ng
       - name: SCP Command to Transfer Files
         uses: appleboy/scp-action@v0.1.3
         with:
