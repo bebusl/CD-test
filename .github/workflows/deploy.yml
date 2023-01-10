@@ -1,0 +1,26 @@
+name: deploy
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: "Install & build"
+        run: |
+          echo $PWD
+          mv public/index.html public/index.ng
+      - name: SCP Command to Transfer Files
+        uses: appleboy/scp-action@v0.1.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: "index.html,blog.html"
+          target: "~/Web/"
+
